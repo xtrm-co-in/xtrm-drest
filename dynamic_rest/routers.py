@@ -41,6 +41,17 @@ drf_version = tuple(
 )
 
 
+def replace_methodname(format_string, methodname):
+    """
+    Partially format a format_string, swapping out any
+    '{methodname}' or '{methodnamehyphen}' components.
+    """
+    methodnamehyphen = methodname.replace('_', '-')
+    ret = format_string
+    ret = ret.replace('{methodname}', methodname)
+    ret = ret.replace('{methodnamehyphen}', methodnamehyphen)
+    return ret
+
 def get_directory(request):
     """Get API directory as a nested list of lists."""
 
@@ -348,6 +359,7 @@ class DynamicRouter(DefaultRouter):
             routes.append(Route(
                 url=url,
                 mapping={'get': methodname},
+                detail=replace_methodname(route_name, field_name),
                 name=replace_methodname(route_name, field_name),
                 initkwargs={},
                 **route_compat_kwargs
