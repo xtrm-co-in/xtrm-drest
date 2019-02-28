@@ -704,3 +704,7 @@ See [License](LICENSE.md).
 [benchmark-linear]: images/benchmark-linear.png
 [benchmark-quadratic]: images/benchmark-quadratic.png
 [benchmark-cubic]: images/benchmark-cubic.png
+
+#Credits
+This is a fork from AltSchool
+DRF 3.8 fixes was implemented by jgissend10
