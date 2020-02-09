@@ -233,6 +233,9 @@ class DynamicFilterBackend(BaseFilterBackend):
             if spec[0] == '-':
                 spec = spec[1:]
                 inex = '_exclude'
+            elif spec[0] == '|':
+                spec = spec[1:]
+                inex = '_or'
             else:
                 inex = '_include'
 
@@ -276,7 +279,9 @@ class DynamicFilterBackend(BaseFilterBackend):
 
         return out
 
-    def _filters_to_query(self, includes, excludes, serializer, q=None):
+    def _filters_to_query(
+            self, includes, excludes, serializer, q=None, or_query=None
+        ):
         """
         Construct Django Query object from request.
         Arguments are dictionaries, which will be passed to Q() as kwargs.
@@ -309,7 +314,7 @@ class DynamicFilterBackend(BaseFilterBackend):
 
         q = q or Q()
 
-        if not includes and not excludes:
+        if not includes and not excludes and not or_query:
             return None
 
         if includes:
@@ -319,6 +324,13 @@ class DynamicFilterBackend(BaseFilterBackend):
             excludes = rewrite_filters(excludes, serializer)
             for k, v in six.iteritems(excludes):
                 q &= ~Q(**{k: v})
+
+        if or_query:
+            or_query = rewrite_filters(or_query, serializer)
+            or_q = Q()
+            for k,v in or_query.items():
+                or_q |= Q(**{k: v})
+            q &= or_q
         return q
 
     def _create_prefetch(self, source, queryset):
@@ -559,7 +571,8 @@ class DynamicFilterBackend(BaseFilterBackend):
         query = self._filters_to_query(
             includes=filters.get('_include'),
             excludes=filters.get('_exclude'),
-            serializer=serializer
+            serializer=serializer,
+            or_query=filters.get('_or'),
         )
 
         # add additional filters specified by calling view
