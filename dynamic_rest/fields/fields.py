@@ -326,6 +326,11 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
                 "Invalid value for '%s': %s object with ID=%s not found" %
                 (self.field_name, related_model.__name__, data)
             )
+        except (TypeError, ValueError):
+            data_type = type(data).__name__
+            raise ValidationError(
+                f'Incorrect type. Expected pk value, received {data_type}.'
+            )
         return instance
 
     def to_internal_value(self, data):
