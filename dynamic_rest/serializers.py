@@ -28,6 +28,9 @@ from dynamic_rest.links import merge_link_object
 from dynamic_rest.meta import get_model_table
 from dynamic_rest.processors import SideloadingProcessor, post_process
 from dynamic_rest.tagged import tag_dict
+from dynamic_rest.mixins import (
+    NestedCreateMixin, NestedUpdateMixin, UniqueFieldsMixin
+)
 
 OPTS = {
     'ENABLE_FIELDS_CACHE': os.environ.get('ENABLE_FIELDS_CACHE', False)
@@ -785,7 +788,8 @@ class WithDynamicModelSerializerMixin(WithDynamicSerializerMixin):
 
 
 class DynamicModelSerializer(
-    WithDynamicModelSerializerMixin,
+    WithDynamicModelSerializerMixin, UniqueFieldsMixin,
+    NestedCreateMixin, NestedUpdateMixin,
     serializers.ModelSerializer
 ):
 
