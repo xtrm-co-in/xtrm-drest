@@ -25,7 +25,8 @@ from tests.serializers import (
     ProfileSerializer,
     UserLocationSerializer,
     UserSerializer,
-    ZebraSerializer
+    ZebraSerializer,
+    CarSerializerWritable,
     )
 
 
@@ -179,3 +180,10 @@ class PermissionViewSet(DynamicModelViewSet):
 class CarViewSet(DynamicModelViewSet):
     serializer_class = CarSerializer
     queryset = Car.objects.all()
+
+
+class CarWritableViewSet(DynamicModelViewSet):
+    model = Cat
+    serializer_class = CarSerializerWritable
+    queryset = Car.objects.all()
+
