@@ -1031,15 +1031,17 @@ class TestAlternateLocationsAPI(APITestCase):
         # sanity check: standard filter returns 1 result
         r = self.client.get('/alternate_locations/?filter{users.last_name}=1')
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 1)
-        location = r.data['locations'][0]
+        results = r.data['results']
+        self.assertEqual(len(results['locations']), 1)
+        location = results['locations'][0]
         self.assertEqual(location['name'], '0')
 
         # using the custom filter gives same result
         r = self.client.get('/alternate_locations/?user_name=0')
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 1)
-        location = r.data['locations'][0]
+        results = r.data['results']
+        self.assertEqual(len(results['locations']), 1)
+        location = results['locations'][0]
         self.assertEqual(location['name'], '0')
 
         # now combine filters, such that no user could satisfy both
@@ -1048,7 +1050,7 @@ class TestAlternateLocationsAPI(APITestCase):
             '/alternate_locations/?user_name=0&filter{users.last_name}=1'
         )
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 0)
+        self.assertEqual(len(r.data['results']['locations']), 0)
 
     def test_separate_filter_doesnt_combine_with_drest_filters(self):
         # This establishes that doing a naive `.filter` results
@@ -1060,8 +1062,8 @@ class TestAlternateLocationsAPI(APITestCase):
             '&filter{users.last_name}=1'
         )
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 1)
-        location = r.data['locations'][0]
+        self.assertEqual(len(r.data['results']['locations']), 1)
+        location = r.data['results']['locations'][0]
         self.assertEqual(location['name'], '0')
 
 
@@ -1366,7 +1368,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'light-brown'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_reverse(self):
@@ -1402,7 +1404,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'gold'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_multiple(self):
@@ -1438,7 +1440,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'gold'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_rewrite(self):
@@ -1474,7 +1476,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'red'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_invalid(self):
