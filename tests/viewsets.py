@@ -186,4 +186,3 @@ class CarWritableViewSet(DynamicModelViewSet):
     model = Cat
     serializer_class = CarSerializerWritable
     queryset = Car.objects.all()
-

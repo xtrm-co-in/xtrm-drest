@@ -1768,7 +1768,7 @@ class WritableViewSetTestCase(APITestCase):
         self.assertTrue('parts' in car)
         self.assertEqual(len(car.get('parts')), 2)
 
-    def test_delete_nested_writable(self):
+    def test_update_delete_nested_writable(self):
         country = Country.objects.create(
             name="Country",
             short_name="CO"
@@ -1805,7 +1805,7 @@ class WritableViewSetTestCase(APITestCase):
         )
         self.assertEqual(
             response.status_code,
-            status.HTTP_204_NO_CONTENT
+            status.HTTP_200_OK
         )
         self.assertTrue('car' in response.data)
         car = response.data.get('car')
@@ -1828,4 +1828,3 @@ class WritableViewSetTestCase(APITestCase):
             response.status_code,
             status.HTTP_204_NO_CONTENT
         )
-

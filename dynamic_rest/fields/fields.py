@@ -319,8 +319,6 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
         return serializer.to_representation(instance)
 
     def _get_related_pk(self, data, model_class):
-        if isinstance(data, int):
-            return None
         pk = data.get('pk') or data.get(model_class._meta.pk.attname)
 
         if pk:
@@ -334,11 +332,11 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
         if isinstance(data, related_model):
             return data
         try:
-            pk = self._get_related_pk(data, related_model)
-            if isinstance(data, int):
-                instance = related_model.objects.get(pk=data)
-            elif isinstance(data, dict) :
+            if isinstance(data, dict):
+                pk = self._get_related_pk(data, related_model)
                 instance = related_model.objects.get(pk=pk)
+            else:
+                instance = related_model.objects.get(pk=data)
         except related_model.DoesNotExist:
             raise ValidationError(
                 "Invalid value for '%s': %s object with ID=%s not found" %
@@ -357,7 +355,9 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
             if self.kwargs['many']:
                 serializer = self.serializer.child
                 if not isinstance(data, list):
-                    raise ParseError("'%s' value must be a list" % self.field_name)
+                    raise ParseError(
+                        "'%s' value must be a list" % self.field_name
+                    )
                 return [
                     self.to_internal_value_single(
                         instance,
