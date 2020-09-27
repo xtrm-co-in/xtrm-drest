@@ -56,7 +56,7 @@ class BaseNestedModelSerializer(serializers.ModelSerializer):
                     continue
 
                 validated_data.pop(field.source)
-                field.child.parenting =parenting
+                field.child.parenting = parenting
                 reverse_relations[field_name] = (
                     related_field, field.child, field.source)
 
