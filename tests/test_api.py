@@ -6,9 +6,14 @@ from django.test import override_settings
 from django.utils import six
 from rest_framework.test import APITestCase
 
-from tests.models import Cat, Group, Location, Permission, Profile, User
+from tests.models import (
+    Cat, Group, Location,
+    Permission, Profile, User,
+    Country, Car, Part
+)
 from tests.serializers import NestedEphemeralSerializer, PermissionSerializer
 from tests.setup import create_fixture
+from rest_framework import status
 
 UNICODE_STRING = six.unichr(9629)  # unicode heart
 # UNICODE_URL_STRING = urllib.quote(UNICODE_STRING.encode('utf-8'))
@@ -1031,15 +1036,17 @@ class TestAlternateLocationsAPI(APITestCase):
         # sanity check: standard filter returns 1 result
         r = self.client.get('/alternate_locations/?filter{users.last_name}=1')
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 1)
-        location = r.data['locations'][0]
+        results = r.data['results']
+        self.assertEqual(len(results['locations']), 1)
+        location = results['locations'][0]
         self.assertEqual(location['name'], '0')
 
         # using the custom filter gives same result
         r = self.client.get('/alternate_locations/?user_name=0')
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 1)
-        location = r.data['locations'][0]
+        results = r.data['results']
+        self.assertEqual(len(results['locations']), 1)
+        location = results['locations'][0]
         self.assertEqual(location['name'], '0')
 
         # now combine filters, such that no user could satisfy both
@@ -1048,7 +1055,7 @@ class TestAlternateLocationsAPI(APITestCase):
             '/alternate_locations/?user_name=0&filter{users.last_name}=1'
         )
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 0)
+        self.assertEqual(len(r.data['results']['locations']), 0)
 
     def test_separate_filter_doesnt_combine_with_drest_filters(self):
         # This establishes that doing a naive `.filter` results
@@ -1060,8 +1067,8 @@ class TestAlternateLocationsAPI(APITestCase):
             '&filter{users.last_name}=1'
         )
         self.assertEqual(r.status_code, 200)
-        self.assertEqual(len(r.data['locations']), 1)
-        location = r.data['locations'][0]
+        self.assertEqual(len(r.data['results']['locations']), 1)
+        location = r.data['results']['locations'][0]
         self.assertEqual(location['name'], '0')
 
 
@@ -1366,7 +1373,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'light-brown'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_reverse(self):
@@ -1402,7 +1409,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'gold'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_multiple(self):
@@ -1438,7 +1445,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'gold'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_rewrite(self):
@@ -1474,7 +1481,7 @@ class TestDogsAPI(APITestCase):
             'fur': 'red'
         }]
         actual_response = json.loads(
-            response.content.decode('utf-8')).get('dogs')
+            response.content.decode('utf-8')).get('results').get('dogs')
         self.assertEquals(expected_response, actual_response)
 
     def test_sort_invalid(self):
@@ -1680,3 +1687,144 @@ class TestFilters(APITestCase):
         url = '/users/?filter{pk}=123x'
         response = self.client.get(url)
         self.assertEqual(400, response.status_code)
+
+
+class WritableViewSetTestCase(APITestCase):
+    def setUp(self):
+        self.fixture = create_fixture()
+
+    def test_create_writable(self):
+        country = Country.objects.create(
+            name="Country",
+            short_name="CO"
+        )
+        data = {
+            "name": "Car",
+            "country": {
+                "id": country.id
+            },
+            "parts": [
+                {
+                    "name": "Part",
+                    "country": {
+                        "id": country.id
+                    }
+                }
+            ]
+        }
+        response = self.client.post(
+            '/carsv2/',
+            json.dumps(data),
+            content_type='application/json',
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_201_CREATED
+        )
+        self.assertTrue('car' in response.data)
+        car = response.data.get('car')
+        self.assertEqual(car.get('name'), 'Car')
+        self.assertTrue('country' in car)
+        self.assertTrue('parts' in car)
+        self.assertEqual(len(car.get('parts')), 1)
+
+    def test_update_writable(self):
+        country = Country.objects.create(
+            name="Country",
+            short_name="CO"
+        )
+
+        car = Car.objects.create(
+            name="Car",
+            country=country
+        )
+        data = {
+            "id": car.id,
+            "name": "Car1",
+            "country": country.id,
+            "parts": [
+                {
+                    "name": "Part1",
+                    "country": {
+                        "id": country.id
+                    }
+                },
+                {
+                    "name": "Part2",
+                    "country": country.id
+                }
+            ]
+        }
+        response = self.client.put(
+            f'/carsv2/{car.pk}/',
+            json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+        self.assertTrue('car' in response.data)
+        car = response.data.get('car')
+        self.assertEqual(car.get('name'), 'Car1')
+        self.assertTrue('country' in car)
+        self.assertTrue('parts' in car)
+        self.assertEqual(len(car.get('parts')), 2)
+
+    def test_update_delete_nested_writable(self):
+        country = Country.objects.create(
+            name="Country",
+            short_name="CO"
+        )
+        car = Car.objects.create(
+            name="Car",
+            country=country,
+        )
+        part = Part.objects.create(
+            country=country,
+            name='Part',
+            car=car
+        )
+        data = {
+            "name": "Car1",
+            "country": country.id,
+            "parts": [
+                {
+                    "name": "Part1",
+                    "country": {
+                        "id": country.id
+                    }
+                },
+                {
+                    "id": part.id,
+                    "-DELETE": "true"
+                }
+            ]
+        }
+        response = self.client.put(
+            f'/carsv2/{car.pk}/',
+            json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_200_OK
+        )
+        self.assertTrue('car' in response.data)
+        car = response.data.get('car')
+        self.assertEqual(car.get('name'), 'Car1')
+        self.assertTrue('country' in car)
+        self.assertTrue('parts' in car)
+        self.assertEqual(len(car.get('parts')), 1)
+
+    def test_delete_nested_writable(self):
+        country = Country.objects.create(
+            name="Country",
+            short_name="CO"
+        )
+        car = Car.objects.create(
+            name="Car",
+            country=country,
+        )
+        response = self.client.delete(f'/carsv2/{car.pk}/')
+        self.assertEqual(
+            response.status_code,
+            status.HTTP_204_NO_CONTENT
+        )

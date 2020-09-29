@@ -706,5 +706,9 @@ See [License](LICENSE.md).
 [benchmark-cubic]: images/benchmark-cubic.png
 
 #Credits
-This is a fork from AltSchool
+* This is a fork from AltSchool
 DRF 3.8 fixes was implemented by jgissend10
+
+* [drf-writable-nested](https://github.com/beda-software/drf-writable-nested) - 
+The writable nested part was from drf-writable-nested implemented 
+by beda-software

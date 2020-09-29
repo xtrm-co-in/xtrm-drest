@@ -92,6 +92,8 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
             embed=False,
             sideloading=None,
             debug=False,
+            writable=False,
+            allow_parenting=False,
             **kwargs
     ):
         """
@@ -119,6 +121,8 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
             self.link = kwargs.pop('link')
         super(DynamicRelationField, self).__init__(**kwargs)
         self.kwargs['many'] = self.many = many
+        self.kwargs['writable'] = self.writable = writable
+        self.kwargs['allow_parenting'] = self.allow_parenting = allow_parenting
 
     def get_model(self):
         """Get the child serializer's model."""
@@ -314,13 +318,25 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
 
         return serializer.to_representation(instance)
 
+    def _get_related_pk(self, data, model_class):
+        pk = data.get('pk') or data.get(model_class._meta.pk.attname)
+
+        if pk:
+            return str(pk)
+
+        return None
+
     def to_internal_value_single(self, data, serializer):
         """Return the underlying object, given the serialized form."""
         related_model = serializer.Meta.model
         if isinstance(data, related_model):
             return data
         try:
-            instance = related_model.objects.get(pk=data)
+            if isinstance(data, dict):
+                pk = self._get_related_pk(data, related_model)
+                instance = related_model.objects.get(pk=pk)
+            else:
+                instance = related_model.objects.get(pk=data)
         except related_model.DoesNotExist:
             raise ValidationError(
                 "Invalid value for '%s': %s object with ID=%s not found" %
@@ -335,17 +351,21 @@ class DynamicRelationField(WithRelationalFieldMixin, DynamicField):
 
     def to_internal_value(self, data):
         """Return the underlying object(s), given the serialized form."""
-        if self.kwargs['many']:
-            serializer = self.serializer.child
-            if not isinstance(data, list):
-                raise ParseError("'%s' value must be a list" % self.field_name)
-            return [
-                self.to_internal_value_single(
-                    instance,
-                    serializer
-                ) for instance in data
-            ]
-        return self.to_internal_value_single(data, self.serializer)
+        if not self.kwargs['writable']:
+            if self.kwargs['many']:
+                serializer = self.serializer.child
+                if not isinstance(data, list):
+                    raise ParseError(
+                        "'%s' value must be a list" % self.field_name
+                    )
+                return [
+                    self.to_internal_value_single(
+                        instance,
+                        serializer
+                    ) for instance in data
+                ]
+            return self.to_internal_value_single(data, self.serializer)
+        return []
 
     @property
     def serializer_class(self):
