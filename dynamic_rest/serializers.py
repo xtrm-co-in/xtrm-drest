@@ -479,9 +479,9 @@ class WithDynamicSerializerMixin(
                 elif include is False:
                     deferred.add(name)
 
-        for name in deferred:
-            serializer_fields.pop(name)
-
+        if self.get_request_method() not in ("POST", "PUT", "PATCH"):
+            for name in deferred:
+                serializer_fields.pop(name)
         # Set read_only flags based on read_only_fields meta list.
         # Here to cover DynamicFields not covered by DRF.
         ro_fields = getattr(self.Meta, 'read_only_fields', [])
