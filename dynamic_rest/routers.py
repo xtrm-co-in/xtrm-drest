@@ -8,7 +8,7 @@ try:
 except ImportError:
     from django.core.urlresolvers import get_script_prefix
 
-from django.utils import six
+import six
 from rest_framework import views
 from rest_framework.response import Response
 from rest_framework.reverse import reverse
