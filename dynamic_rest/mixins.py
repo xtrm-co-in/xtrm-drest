@@ -216,7 +216,7 @@ class BaseNestedModelSerializer(serializers.ModelSerializer):
                         continue
                 if (
                         not field.parenting and obj
-                        and obj.parent and obj.parent != instance
+                        and field.parent and field.parent != instance
                 ):
                     errors.append("Cannot reparent child")
                     continue
