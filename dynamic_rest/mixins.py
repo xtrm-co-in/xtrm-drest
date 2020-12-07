@@ -362,18 +362,14 @@ class NestedUpdateMixin(BaseNestedModelSerializer):
                     related_field.name: instance,
                 }
 
-            # current_ids = self._extract_related_pks(field, related_data)
-            deleted_ids = []
-            for data in related_data:
-                if data.get('-DELETE', False):
-                    pk = self._get_related_pk(data, field.Meta.model)
-                    deleted_ids.append(pk)
+            current_ids = self._extract_related_pks(field, related_data)
+
             try:
                 pks_to_delete = list(
                     model_class.objects.filter(
                         **related_field_lookup
-                    ).filter(
-                        pk__in=deleted_ids
+                    ).exclude(
+                        pk__in=current_ids
                     ).values_list('pk', flat=True)
                 )
 
