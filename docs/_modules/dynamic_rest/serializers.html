@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dynamic_rest.serializers &mdash; Dynamic REST 1.3.15 documentation</title>
+  <title>xtrm_drest.serializers &mdash; Dynamic REST 1.3.15 documentation</title>
   
 
   
@@ -83,7 +83,7 @@
                 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Dynamic REST Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../dynamic_rest.html">dynamic_rest package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xtrm_drest.html">xtrm_drest package</a></li>
 </ul>
 
             
@@ -116,7 +116,7 @@
       
           <li><a href="../index.html">Module code</a> &raquo;</li>
       
-    <li>dynamic_rest.serializers</li>
+    <li>xtrm_drest.serializers</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -128,7 +128,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for dynamic_rest.serializers</h1><div class="highlight"><pre>
+  <h1>Source code for xtrm_drest.serializers</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains custom serializer classes.&quot;&quot;&quot;</span>
 <span class="kn">import</span> <span class="nn">copy</span>
 <span class="kn">import</span> <span class="nn">inspect</span>
@@ -141,17 +141,17 @@
 <span class="kn">from</span> <span class="nn">rest_framework.fields</span> <span class="kn">import</span> <span class="n">SkipField</span>
 <span class="kn">from</span> <span class="nn">rest_framework.utils.serializer_helpers</span> <span class="kn">import</span> <span class="n">ReturnDict</span><span class="p">,</span> <span class="n">ReturnList</span>
 
-<span class="kn">from</span> <span class="nn">dynamic_rest.bases</span> <span class="kn">import</span> <span class="n">DynamicSerializerBase</span>
-<span class="kn">from</span> <span class="nn">dynamic_rest.conf</span> <span class="kn">import</span> <span class="n">settings</span>
-<span class="kn">from</span> <span class="nn">dynamic_rest.fields</span> <span class="kn">import</span> <span class="n">DynamicRelationField</span>
-<span class="kn">from</span> <span class="nn">dynamic_rest.links</span> <span class="kn">import</span> <span class="n">merge_link_object</span>
-<span class="kn">from</span> <span class="nn">dynamic_rest.meta</span> <span class="kn">import</span> <span class="n">get_model_table</span>
-<span class="kn">from</span> <span class="nn">dynamic_rest.processors</span> <span class="kn">import</span> <span class="n">SideloadingProcessor</span>
-<span class="kn">from</span> <span class="nn">dynamic_rest.tagged</span> <span class="kn">import</span> <span class="n">tag_dict</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.bases</span> <span class="kn">import</span> <span class="n">DynamicSerializerBase</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.fields</span> <span class="kn">import</span> <span class="n">DynamicRelationField</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.links</span> <span class="kn">import</span> <span class="n">merge_link_object</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.meta</span> <span class="kn">import</span> <span class="n">get_model_table</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.processors</span> <span class="kn">import</span> <span class="n">SideloadingProcessor</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.tagged</span> <span class="kn">import</span> <span class="n">tag_dict</span>
 
 
-<div class="viewcode-block" id="WithResourceKeyMixin"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithResourceKeyMixin">[docs]</a><span class="k">class</span> <span class="nc">WithResourceKeyMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
-<div class="viewcode-block" id="WithResourceKeyMixin.get_resource_key"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithResourceKeyMixin.get_resource_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_resource_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WithResourceKeyMixin"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithResourceKeyMixin">[docs]</a><span class="k">class</span> <span class="nc">WithResourceKeyMixin</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="WithResourceKeyMixin.get_resource_key"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithResourceKeyMixin.get_resource_key">[docs]</a>    <span class="k">def</span> <span class="nf">get_resource_key</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Return canonical resource key, usually the DB table name.&quot;&quot;&quot;</span>
         <span class="n">model</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span>
         <span class="k">if</span> <span class="n">model</span><span class="p">:</span>
@@ -160,7 +160,7 @@
             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span></div></div>
 
 
-<div class="viewcode-block" id="DynamicListSerializer"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicListSerializer">[docs]</a><span class="k">class</span> <span class="nc">DynamicListSerializer</span><span class="p">(</span><span class="n">WithResourceKeyMixin</span><span class="p">,</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ListSerializer</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicListSerializer"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicListSerializer">[docs]</a><span class="k">class</span> <span class="nc">DynamicListSerializer</span><span class="p">(</span><span class="n">WithResourceKeyMixin</span><span class="p">,</span> <span class="n">serializers</span><span class="o">.</span><span class="n">ListSerializer</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Custom ListSerializer class.</span>
 
 <span class="sd">    This implementation delegates DREST-specific methods to</span>
@@ -174,23 +174,23 @@
         <span class="nb">super</span><span class="p">(</span><span class="n">DynamicListSerializer</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">__init__</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">parent</span> <span class="o">=</span> <span class="bp">self</span>
 
-<div class="viewcode-block" id="DynamicListSerializer.to_representation"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicListSerializer.to_representation">[docs]</a>    <span class="k">def</span> <span class="nf">to_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicListSerializer.to_representation"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicListSerializer.to_representation">[docs]</a>    <span class="k">def</span> <span class="nf">to_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">iterable</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">all</span><span class="p">()</span> <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">models</span><span class="o">.</span><span class="n">Manager</span><span class="p">)</span> <span class="k">else</span> <span class="n">data</span>
         <span class="k">return</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">to_representation</span><span class="p">(</span><span class="n">item</span><span class="p">)</span> <span class="k">for</span> <span class="n">item</span> <span class="ow">in</span> <span class="n">iterable</span><span class="p">]</span></div>
 
-<div class="viewcode-block" id="DynamicListSerializer.get_model"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicListSerializer.get_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicListSerializer.get_model"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicListSerializer.get_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the child&#39;s model.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">get_model</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DynamicListSerializer.get_name"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicListSerializer.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicListSerializer.get_name"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicListSerializer.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the child&#39;s name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DynamicListSerializer.get_plural_name"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicListSerializer.get_plural_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_plural_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicListSerializer.get_plural_name"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicListSerializer.get_plural_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_plural_name</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the child&#39;s plural name.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">get_plural_name</span><span class="p">()</span></div>
 
-<div class="viewcode-block" id="DynamicListSerializer.id_only"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicListSerializer.id_only">[docs]</a>    <span class="k">def</span> <span class="nf">id_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicListSerializer.id_only"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicListSerializer.id_only">[docs]</a>    <span class="k">def</span> <span class="nf">id_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the child&#39;s rendering mode.&quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">id_only</span><span class="p">()</span></div>
 
@@ -211,7 +211,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">_sideloaded_data</span> <span class="o">=</span> <span class="n">ReturnList</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">serializer</span><span class="o">=</span><span class="bp">self</span><span class="p">)</span>
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sideloaded_data</span>
 
-<div class="viewcode-block" id="DynamicListSerializer.update"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicListSerializer.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">validated_data</span><span class="p">):</span>
+<div class="viewcode-block" id="DynamicListSerializer.update"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicListSerializer.update">[docs]</a>    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">queryset</span><span class="p">,</span> <span class="n">validated_data</span><span class="p">):</span>
         <span class="n">lookup_attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">child</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s1">&#39;update_lookup_field&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span>
 
         <span class="n">lookup_objects</span> <span class="o">=</span> <span class="p">{</span>
@@ -248,7 +248,7 @@
         <span class="k">return</span> <span class="n">updated_objects</span></div></div>
 
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin">[docs]</a><span class="k">class</span> <span class="nc">WithDynamicSerializerMixin</span><span class="p">(</span><span class="n">WithResourceKeyMixin</span><span class="p">,</span> <span class="n">DynamicSerializerBase</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin">[docs]</a><span class="k">class</span> <span class="nc">WithDynamicSerializerMixin</span><span class="p">(</span><span class="n">WithResourceKeyMixin</span><span class="p">,</span> <span class="n">DynamicSerializerBase</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Base class for DREST serializers.</span>
 
 <span class="sd">    This class provides support for dynamic field inclusions/exclusions.</span>
@@ -381,7 +381,7 @@
                 <span class="bp">self</span><span class="o">.</span><span class="n">request_fields</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="bp">True</span>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="WithDynamicSerializerMixin.get_model"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.get_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.get_model"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.get_model">[docs]</a>    <span class="k">def</span> <span class="nf">get_model</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the model, if the serializer has one.</span>
 
 <span class="sd">        Model serializers should implement this method.</span>
@@ -389,7 +389,7 @@
         <span class="k">return</span> <span class="bp">None</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="WithDynamicSerializerMixin.get_name"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.get_name"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.get_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the serializer name.</span>
 
 <span class="sd">        The name can be defined on the Meta class or will be generated</span>
@@ -406,7 +406,7 @@
         <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">name</span></div>
 
     <span class="nd">@classmethod</span>
-<div class="viewcode-block" id="WithDynamicSerializerMixin.get_plural_name"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.get_plural_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_plural_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.get_plural_name"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.get_plural_name">[docs]</a>    <span class="k">def</span> <span class="nf">get_plural_name</span><span class="p">(</span><span class="n">cls</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get the serializer&#39;s plural name.</span>
 
 <span class="sd">        The plural name may be defined on the Meta class.</span>
@@ -421,7 +421,7 @@
             <span class="p">)</span>
         <span class="k">return</span> <span class="n">cls</span><span class="o">.</span><span class="n">Meta</span><span class="o">.</span><span class="n">plural_name</span></div>
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin.get_all_fields"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.get_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.get_all_fields"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.get_all_fields">[docs]</a>    <span class="k">def</span> <span class="nf">get_all_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the entire serializer field set.</span>
 
 <span class="sd">        Does not respect dynamic field inclusions/exclusions.</span>
@@ -445,7 +445,7 @@
             <span class="n">meta_deferred</span>
         <span class="p">}</span>
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin.get_fields"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.get_fields">[docs]</a>    <span class="k">def</span> <span class="nf">get_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.get_fields"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.get_fields">[docs]</a>    <span class="k">def</span> <span class="nf">get_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Returns the serializer&#39;s field set.</span>
 
 <span class="sd">        If `dynamic` is True, respects field inclusions/exlcusions.</span>
@@ -479,7 +479,7 @@
 
         <span class="k">return</span> <span class="n">serializer_fields</span></div>
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin.get_link_fields"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.get_link_fields">[docs]</a>    <span class="k">def</span> <span class="nf">get_link_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.get_link_fields"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.get_link_fields">[docs]</a>    <span class="k">def</span> <span class="nf">get_link_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Construct dict of name:field for linkable fields.&quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;_link_fields&#39;</span><span class="p">):</span>
             <span class="n">all_fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_all_fields</span><span class="p">()</span>
@@ -541,7 +541,7 @@
 
         <span class="k">return</span> <span class="n">ret</span>
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin.to_representation"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.to_representation">[docs]</a>    <span class="k">def</span> <span class="nf">to_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.to_representation"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.to_representation">[docs]</a>    <span class="k">def</span> <span class="nf">to_representation</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Modified to_representation method.</span>
 
 <span class="sd">        Arguments:</span>
@@ -576,7 +576,7 @@
             <span class="n">embed</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">embed</span>
         <span class="p">)</span></div>
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin.to_internal_value"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.to_internal_value">[docs]</a>    <span class="k">def</span> <span class="nf">to_internal_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.to_internal_value"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.to_internal_value">[docs]</a>    <span class="k">def</span> <span class="nf">to_internal_value</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="n">value</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span><span class="n">WithDynamicSerializerMixin</span><span class="p">,</span> <span class="bp">self</span><span class="p">)</span><span class="o">.</span><span class="n">to_internal_value</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
         <span class="n">id_attr</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">Meta</span><span class="p">,</span> <span class="s1">&#39;update_lookup_field&#39;</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">)</span>
         <span class="n">request_method</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span>
@@ -596,7 +596,7 @@
 
         <span class="k">return</span> <span class="n">value</span></div>
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin.save"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.save"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.save">[docs]</a>    <span class="k">def</span> <span class="nf">save</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Serializer save that address prefetch issues.&quot;&quot;&quot;</span>
         <span class="n">update</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;instance&#39;</span><span class="p">,</span> <span class="bp">None</span><span class="p">)</span> <span class="ow">is</span> <span class="ow">not</span> <span class="bp">None</span>
         <span class="n">instance</span> <span class="o">=</span> <span class="nb">super</span><span class="p">(</span>
@@ -613,7 +613,7 @@
             <span class="n">instance</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">instance</span> <span class="o">=</span> <span class="n">view</span><span class="o">.</span><span class="n">get_object</span><span class="p">()</span>
         <span class="k">return</span> <span class="n">instance</span></div>
 
-<div class="viewcode-block" id="WithDynamicSerializerMixin.id_only"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicSerializerMixin.id_only">[docs]</a>    <span class="k">def</span> <span class="nf">id_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="WithDynamicSerializerMixin.id_only"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicSerializerMixin.id_only">[docs]</a>    <span class="k">def</span> <span class="nf">id_only</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check whether the serializer should return an ID instead of an object.</span>
 
 <span class="sd">        Returns:</span>
@@ -635,7 +635,7 @@
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">_sideloaded_data</span></div>
 
 
-<div class="viewcode-block" id="WithDynamicModelSerializerMixin"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.WithDynamicModelSerializerMixin">[docs]</a><span class="k">class</span> <span class="nc">WithDynamicModelSerializerMixin</span><span class="p">(</span><span class="n">WithDynamicSerializerMixin</span><span class="p">):</span></div>
+<div class="viewcode-block" id="WithDynamicModelSerializerMixin"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.WithDynamicModelSerializerMixin">[docs]</a><span class="k">class</span> <span class="nc">WithDynamicModelSerializerMixin</span><span class="p">(</span><span class="n">WithDynamicSerializerMixin</span><span class="p">):</span></div>
 
     <span class="sd">&quot;&quot;&quot;Adds DREST serializer methods specific to model-based serializers.&quot;&quot;&quot;</span>
 
@@ -670,7 +670,7 @@
         <span class="k">return</span> <span class="n">out</span>
 
 
-<div class="viewcode-block" id="DynamicModelSerializer"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicModelSerializer">[docs]</a><span class="k">class</span> <span class="nc">DynamicModelSerializer</span><span class="p">(</span>
+<div class="viewcode-block" id="DynamicModelSerializer"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicModelSerializer">[docs]</a><span class="k">class</span> <span class="nc">DynamicModelSerializer</span><span class="p">(</span>
     <span class="n">WithDynamicModelSerializerMixin</span><span class="p">,</span>
     <span class="n">serializers</span><span class="o">.</span><span class="n">ModelSerializer</span>
 <span class="p">):</span></div>
@@ -679,7 +679,7 @@
     <span class="k">pass</span>
 
 
-<div class="viewcode-block" id="EphemeralObject"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.EphemeralObject">[docs]</a><span class="k">class</span> <span class="nc">EphemeralObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<div class="viewcode-block" id="EphemeralObject"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.EphemeralObject">[docs]</a><span class="k">class</span> <span class="nc">EphemeralObject</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
 
     <span class="sd">&quot;&quot;&quot;Object that initializes attributes from a dict.&quot;&quot;&quot;</span>
 
@@ -689,7 +689,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">__dict__</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">values_dict</span><span class="p">)</span>
 
 
-<div class="viewcode-block" id="DynamicEphemeralSerializer"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.serializers.DynamicEphemeralSerializer">[docs]</a><span class="k">class</span> <span class="nc">DynamicEphemeralSerializer</span><span class="p">(</span>
+<div class="viewcode-block" id="DynamicEphemeralSerializer"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.serializers.DynamicEphemeralSerializer">[docs]</a><span class="k">class</span> <span class="nc">DynamicEphemeralSerializer</span><span class="p">(</span>
     <span class="n">WithDynamicSerializerMixin</span><span class="p">,</span>
     <span class="n">serializers</span><span class="o">.</span><span class="n">Serializer</span>
 <span class="p">):</span></div>

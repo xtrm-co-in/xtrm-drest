@@ -76,13 +76,13 @@ but it can be used to provide fast and flexible CRUD operations to any consumer 
 
 (or add `dynamic-rest` to `requirements.txt` or `setup.py`)
 
-2) Add `rest_framework` and `dynamic_rest` to `INSTALLED_APPS` in `settings.py`:
+2) Add `rest_framework` and `xtrm_drest` to `INSTALLED_APPS` in `settings.py`:
 
 ```python
     INSTALLED_APPS = (
         ...
         'rest_framework',
-        'dynamic_rest'
+        'xtrm_drest'
     )
 
 ```
@@ -94,7 +94,7 @@ in your settings:
 REST_FRAMEWORK = {
     'DEFAULT_RENDERER_CLASSES': [
         'rest_framework.renderers.JSONRenderer',
-        'dynamic_rest.renderers.DynamicBrowsableAPIRenderer',
+        'xtrm_drest.renderers.DynamicBrowsableAPIRenderer',
     ],
 } 
 ```
@@ -523,7 +523,7 @@ The sky is the limit! DREST supports just about every basic filtering scenario a
 * gt
 ...
 
-See the [full list here](dynamic_rest/filters.py#L153-L176).
+See the [full list here](xtrm_drest/filters.py#L153-L176).
 
 ## Ordering
 
@@ -574,10 +574,10 @@ Cubic benchmark: rendering a list of lists of lists
 # Settings
 
 DREST is configurable, and all settings should be nested under a single block in your `settings.py` file.
-Here are our [defaults](dynamic_rest/conf.py):
+Here are our [defaults](xtrm_drest/conf.py):
 
 ```python
-DYNAMIC_REST = {
+xtrm_drest = {
     # DEBUG: enable/disable internal debugging
     'DEBUG': False,
 

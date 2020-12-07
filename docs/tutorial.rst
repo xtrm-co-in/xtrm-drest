@@ -16,7 +16,7 @@ Setup
 Before starting the tutorial, you’ll need to set up Dynamic REST in your dev environment. Refer to the README for details, but it should look something like::
 
     $ git clone git@github.com:AltSchool/dynamic-rest.git
-    $ cd dynamic_rest
+    $ cd xtrm_drest
     $ make fixtures
     $ make server
 
@@ -236,7 +236,7 @@ DREST-ifying Existing ViewSet
 -----------------------------
 When migrating existing APIs, it might be possible to “layer” on DREST into an existing ViewSet by using WithDynamicViewSetMixin. Note that getting the old class to play nice might require some shenanigans (see super below)::
 
-    from dynamic_rest.viewsets import WithDynamicViewSetMixin
+    from xtrm_drest.viewsets import WithDynamicViewSetMixin
 
     class NewViewSet(WithDynamicViewSetMixin, OldViewSet):
         # …
@@ -251,7 +251,7 @@ DREST-ifying Existing Serializer
 --------------------------------
 As with ViewSets, there’s a mixin to DREST-ify an existing serializer. Same shenanigans warning applies as above::
 
-    from dynamic_rest.serializers import WithDynamicModelSerializerMixin
+    from xtrm_drest.serializers import WithDynamicModelSerializerMixin
 
     class NewFooSerializer(WithDynamicModelSerializerMixin, OldFooSerializer):
         # Must override Meta class with DREST attributes
@@ -282,7 +282,7 @@ Computed Fields
 ---------------
 Historically, we’ve implemented computed fields using SerializerMethodField, which led to a proliferation of one-off methods with ad hoc implementations. SerializerMethodFields are also problematic because they may not play nice with standard features (like inclusion/sideloading), and don’t have declared data types. In DREST, we introduced a DynamicComputedField base-class, to encourage developers to define and implement (or use) reusable computed fields.::
 
-    from dynamic_rest.fields import DynamicComputedField
+    from xtrm_drest.fields import DynamicComputedField
 
     class HasPermsField(DynamicComputedField):
         def __init__(self, required_perms, **kwargs):

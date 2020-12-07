@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dynamic_rest.processors &mdash; Dynamic REST 1.3.15 documentation</title>
+  <title>xtrm_drest.processors &mdash; Dynamic REST 1.3.15 documentation</title>
   
 
   
@@ -83,7 +83,7 @@
                 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Dynamic REST Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../dynamic_rest.html">dynamic_rest package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xtrm_drest.html">xtrm_drest package</a></li>
 </ul>
 
             
@@ -116,7 +116,7 @@
       
           <li><a href="../index.html">Module code</a> &raquo;</li>
       
-    <li>dynamic_rest.processors</li>
+    <li>xtrm_drest.processors</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -128,7 +128,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for dynamic_rest.processors</h1><div class="highlight"><pre>
+  <h1>Source code for xtrm_drest.processors</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains response processors.&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">defaultdict</span>
 
@@ -136,11 +136,11 @@
 <span class="kn">from</span> <span class="nn">rest_framework.serializers</span> <span class="kn">import</span> <span class="n">ListSerializer</span>
 <span class="kn">from</span> <span class="nn">rest_framework.utils.serializer_helpers</span> <span class="kn">import</span> <span class="n">ReturnDict</span>
 
-<span class="kn">from</span> <span class="nn">dynamic_rest.conf</span> <span class="kn">import</span> <span class="n">settings</span>
-<span class="kn">from</span> <span class="nn">dynamic_rest.tagged</span> <span class="kn">import</span> <span class="n">TaggedDict</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.conf</span> <span class="kn">import</span> <span class="n">settings</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.tagged</span> <span class="kn">import</span> <span class="n">TaggedDict</span>
 
 
-<div class="viewcode-block" id="SideloadingProcessor"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.processors.SideloadingProcessor">[docs]</a><span class="k">class</span> <span class="nc">SideloadingProcessor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<div class="viewcode-block" id="SideloadingProcessor"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.processors.SideloadingProcessor">[docs]</a><span class="k">class</span> <span class="nc">SideloadingProcessor</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;A processor that sideloads serializer data.</span>
 
 <span class="sd">    Sideloaded records are returned under top-level</span>
@@ -175,7 +175,7 @@
         <span class="p">)</span> <span class="k">else</span> <span class="bp">self</span><span class="o">.</span><span class="n">plural_name</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">[</span><span class="n">resource_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">data</span>
 
-<div class="viewcode-block" id="SideloadingProcessor.is_dynamic"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.processors.SideloadingProcessor.is_dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">is_dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
+<div class="viewcode-block" id="SideloadingProcessor.is_dynamic"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.processors.SideloadingProcessor.is_dynamic">[docs]</a>    <span class="k">def</span> <span class="nf">is_dynamic</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Check whether the given data dictionary is a DREST structure.</span>
 
 <span class="sd">        Arguments:</span>
@@ -183,7 +183,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">data</span><span class="p">,</span> <span class="n">TaggedDict</span><span class="p">)</span></div>
 
-<div class="viewcode-block" id="SideloadingProcessor.process"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.processors.SideloadingProcessor.process">[docs]</a>    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parent_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
+<div class="viewcode-block" id="SideloadingProcessor.process"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.processors.SideloadingProcessor.process">[docs]</a>    <span class="k">def</span> <span class="nf">process</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">obj</span><span class="p">,</span> <span class="n">parent</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">parent_key</span><span class="o">=</span><span class="bp">None</span><span class="p">,</span> <span class="n">depth</span><span class="o">=</span><span class="mi">0</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Recursively process the data for sideloading.</span>
 
 <span class="sd">        Converts the nested representation into a sideloaded representation.</span>

@@ -1,22 +1,22 @@
-import sys
-from setuptools import find_packages, setup
+import setuptools
 
-NAME = 'dynamic-rest'
-DESCRIPTION = 'Adds Dynamic API support to Django REST Framework.'
-URL = 'http://github.com/AltSchool/dynamic-rest'
-VERSION = '1.9.3'
-SCRIPTS = ['manage.py']
+with open("README.md", "r", encoding="utf-8") as fh:
+    long_description = fh.read()
 
-setup(
-    description=DESCRIPTION,
-    include_package_data=True,
-    install_requires=open('install_requires.txt'
-                          if sys.version_info.major == 2
-                          else 'install_requires_python3.txt').readlines(),
-    long_description=open('README.rst').read(),
-    name=NAME,
-    packages=find_packages(),
-    scripts=SCRIPTS,
-    url=URL,
-    version=VERSION
+setuptools.setup(
+    name="xtrm-drest", # Replace with your own username
+    version="0.0.5",
+    author="Extreme Solutions",
+    author_email="ketan@extremesolutions.in",
+    description="Dynamic REST with DRF Writable Nested package for CRUD",
+    long_description=long_description,
+    long_description_content_type="text/markdown",
+    url="", # https://github.com/pypa/sampleproject
+    packages=setuptools.find_packages(),
+    classifiers=[
+        "Programming Language :: Python :: 3",
+        "License :: OSI Approved :: MIT License",
+        "Operating System :: OS Independent",
+    ],
+    python_requires='>=3.6',
 )

@@ -7,7 +7,7 @@ from tests.models import A, B, C, D
 class TestPrefetch(TestCase):
     """Tests prefetch corner-case bugs introduced in Django 1.7
 
-    See dynamic_rest.patches for details.
+    See xtrm_drest.patches for details.
     """
 
     def test_nested_prefetch(self):

@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dynamic_rest.meta &mdash; Dynamic REST 1.3.15 documentation</title>
+  <title>xtrm_drest.meta &mdash; Dynamic REST 1.3.15 documentation</title>
   
 
   
@@ -83,7 +83,7 @@
                 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Dynamic REST Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../dynamic_rest.html">dynamic_rest package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xtrm_drest.html">xtrm_drest package</a></li>
 </ul>
 
             
@@ -116,7 +116,7 @@
       
           <li><a href="../index.html">Module code</a> &raquo;</li>
       
-    <li>dynamic_rest.meta</li>
+    <li>xtrm_drest.meta</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -128,16 +128,16 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for dynamic_rest.meta</h1><div class="highlight"><pre>
+  <h1>Source code for xtrm_drest.meta</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;Module containing Django meta helpers.&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">chain</span>
 
 <span class="kn">from</span> <span class="nn">django.db.models</span> <span class="kn">import</span> <span class="n">ManyToManyField</span>
 
-<span class="kn">from</span> <span class="nn">dynamic_rest.related</span> <span class="kn">import</span> <span class="n">RelatedObject</span>
+<span class="kn">from</span> <span class="nn">xtrm_drest.related</span> <span class="kn">import</span> <span class="n">RelatedObject</span>
 
 
-<div class="viewcode-block" id="is_model_field"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.meta.is_model_field">[docs]</a><span class="k">def</span> <span class="nf">is_model_field</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
+<div class="viewcode-block" id="is_model_field"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.meta.is_model_field">[docs]</a><span class="k">def</span> <span class="nf">is_model_field</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Check whether a given field exists on a model.</span>
 
 <span class="sd">    Arguments:</span>
@@ -154,7 +154,7 @@
         <span class="k">return</span> <span class="bp">False</span></div>
 
 
-<div class="viewcode-block" id="get_model_field"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.meta.get_model_field">[docs]</a><span class="k">def</span> <span class="nf">get_model_field</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
+<div class="viewcode-block" id="get_model_field"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.meta.get_model_field">[docs]</a><span class="k">def</span> <span class="nf">get_model_field</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Return a field given a model and field name.</span>
 
 <span class="sd">    Arguments:</span>
@@ -184,7 +184,7 @@
             <span class="p">)</span></div>
 
 
-<div class="viewcode-block" id="is_field_remote"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.meta.is_field_remote">[docs]</a><span class="k">def</span> <span class="nf">is_field_remote</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
+<div class="viewcode-block" id="is_field_remote"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.meta.is_field_remote">[docs]</a><span class="k">def</span> <span class="nf">is_field_remote</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">field_name</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Check whether a given model field is a remote field.</span>
 
 <span class="sd">    A remote field is the inverse of a one-to-many or a</span>
@@ -205,7 +205,7 @@
     <span class="k">return</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">model_field</span><span class="p">,</span> <span class="p">(</span><span class="n">ManyToManyField</span><span class="p">,</span> <span class="n">RelatedObject</span><span class="p">))</span></div>
 
 
-<div class="viewcode-block" id="get_model_table"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.meta.get_model_table">[docs]</a><span class="k">def</span> <span class="nf">get_model_table</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
+<div class="viewcode-block" id="get_model_table"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.meta.get_model_table">[docs]</a><span class="k">def</span> <span class="nf">get_model_table</span><span class="p">(</span><span class="n">model</span><span class="p">):</span>
     <span class="k">try</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">model</span><span class="o">.</span><span class="n">_meta</span><span class="o">.</span><span class="n">db_table</span>
     <span class="k">except</span><span class="p">:</span>

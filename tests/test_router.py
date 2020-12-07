@@ -8,8 +8,8 @@ except ImportError:
 from rest_framework.test import APITestCase
 from rest_framework.routers import DefaultRouter
 
-from dynamic_rest.meta import get_model_table
-from dynamic_rest.routers import DynamicRouter, Route
+from xtrm_drest.meta import get_model_table
+from xtrm_drest.routers import DynamicRouter, Route
 from tests.models import Dog
 from tests.serializers import CatSerializer, DogSerializer
 from tests.urls import urlpatterns  # noqa  force route registration

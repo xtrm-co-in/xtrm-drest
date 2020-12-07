@@ -1,149 +1,149 @@
-dynamic_rest package
+xtrm_drest package
 ====================
 
 Submodules
 ----------
 
-dynamic_rest.bases module
+xtrm_drest.bases module
 -------------------------
 
-.. automodule:: dynamic_rest.bases
+.. automodule:: xtrm_drest.bases
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.conf module
+xtrm_drest.conf module
 ------------------------
 
-.. automodule:: dynamic_rest.conf
+.. automodule:: xtrm_drest.conf
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.constants module
+xtrm_drest.constants module
 -----------------------------
 
-.. automodule:: dynamic_rest.constants
+.. automodule:: xtrm_drest.constants
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.datastructures module
+xtrm_drest.datastructures module
 ----------------------------------
 
-.. automodule:: dynamic_rest.datastructures
+.. automodule:: xtrm_drest.datastructures
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.fields module
+xtrm_drest.fields module
 --------------------------
 
-.. automodule:: dynamic_rest.fields
+.. automodule:: xtrm_drest.fields
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.filters module
+xtrm_drest.filters module
 ---------------------------
 
-.. automodule:: dynamic_rest.filters
+.. automodule:: xtrm_drest.filters
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.links module
+xtrm_drest.links module
 -------------------------
 
-.. automodule:: dynamic_rest.links
+.. automodule:: xtrm_drest.links
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.meta module
+xtrm_drest.meta module
 ------------------------
 
-.. automodule:: dynamic_rest.meta
+.. automodule:: xtrm_drest.meta
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.metadata module
+xtrm_drest.metadata module
 ----------------------------
 
-.. automodule:: dynamic_rest.metadata
+.. automodule:: xtrm_drest.metadata
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.pagination module
+xtrm_drest.pagination module
 ------------------------------
 
-.. automodule:: dynamic_rest.pagination
+.. automodule:: xtrm_drest.pagination
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.patches module
+xtrm_drest.patches module
 ---------------------------
 
-.. automodule:: dynamic_rest.patches
+.. automodule:: xtrm_drest.patches
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.processors module
+xtrm_drest.processors module
 ------------------------------
 
-.. automodule:: dynamic_rest.processors
+.. automodule:: xtrm_drest.processors
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.related module
+xtrm_drest.related module
 ---------------------------
 
-.. automodule:: dynamic_rest.related
+.. automodule:: xtrm_drest.related
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.renderers module
+xtrm_drest.renderers module
 -----------------------------
 
-.. automodule:: dynamic_rest.renderers
+.. automodule:: xtrm_drest.renderers
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.routers module
+xtrm_drest.routers module
 ---------------------------
 
-.. automodule:: dynamic_rest.routers
+.. automodule:: xtrm_drest.routers
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.serializers module
+xtrm_drest.serializers module
 -------------------------------
 
-.. automodule:: dynamic_rest.serializers
+.. automodule:: xtrm_drest.serializers
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.tagged module
+xtrm_drest.tagged module
 --------------------------
 
-.. automodule:: dynamic_rest.tagged
+.. automodule:: xtrm_drest.tagged
     :members:
     :undoc-members:
     :show-inheritance:
 
-dynamic_rest.viewsets module
+xtrm_drest.viewsets module
 ----------------------------
 
-.. automodule:: dynamic_rest.viewsets
+.. automodule:: xtrm_drest.viewsets
     :members:
     :undoc-members:
     :show-inheritance:
@@ -152,7 +152,7 @@ dynamic_rest.viewsets module
 Module contents
 ---------------
 
-.. automodule:: dynamic_rest
+.. automodule:: xtrm_drest
     :members:
     :undoc-members:
     :show-inheritance:

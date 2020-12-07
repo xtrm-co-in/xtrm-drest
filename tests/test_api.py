@@ -21,7 +21,7 @@ UNICODE_URL_STRING = '%E2%96%9D'
 
 
 @override_settings(
-    DYNAMIC_REST={
+    xtrm_drest={
         'ENABLE_LINKS': False
     }
 )
@@ -887,7 +887,7 @@ class TestUsersAPI(APITestCase):
 
 
 @override_settings(
-    DYNAMIC_REST={
+    xtrm_drest={
         'ENABLE_LINKS': False
     }
 )
@@ -1021,7 +1021,7 @@ class TestLocationsAPI(APITestCase):
 
 
 @override_settings(
-    DYNAMIC_REST={
+    xtrm_drest={
         'ENABLE_LINKS': False
     }
 )
@@ -1199,7 +1199,7 @@ class TestLinks(APITestCase):
         )
 
     @override_settings(
-        DYNAMIC_REST={
+        xtrm_drest={
             'ENABLE_HOST_RELATIVE_LINKS': False
         }
     )
@@ -1304,7 +1304,7 @@ class TestLinks(APITestCase):
         self.assertFalse('links' in cat)
 
     @override_settings(
-        DYNAMIC_REST={
+        xtrm_drest={
             'ENABLE_LINKS': True,
             'DEFER_MANY_RELATIONS': True,
         }

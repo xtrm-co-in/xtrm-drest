@@ -1,7 +1,7 @@
-from dynamic_rest import fields as fields
-from dynamic_rest import routers as routers
-from dynamic_rest import serializers as serializers
-from dynamic_rest import viewsets as viewsets
+from xtrm_drest import fields as fields
+from xtrm_drest import routers as routers
+from xtrm_drest import serializers as serializers
+from xtrm_drest import viewsets as viewsets
 
 from .models import Group, Permission, User
 

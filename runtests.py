@@ -9,7 +9,7 @@ import sys
 
 import pytest
 
-APP_NAME = 'dynamic_rest'
+APP_NAME = 'xtrm_drest'
 TESTS = 'tests'
 BENCHMARKS = 'benchmarks'
 PYTEST_ARGS = {

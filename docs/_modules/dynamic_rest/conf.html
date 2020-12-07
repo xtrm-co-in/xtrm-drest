@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dynamic_rest.conf &mdash; Dynamic REST 1.3.15 documentation</title>
+  <title>xtrm_drest.conf &mdash; Dynamic REST 1.3.15 documentation</title>
   
 
   
@@ -83,7 +83,7 @@
                 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Dynamic REST Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../dynamic_rest.html">dynamic_rest package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xtrm_drest.html">xtrm_drest package</a></li>
 </ul>
 
             
@@ -116,7 +116,7 @@
       
           <li><a href="../index.html">Module code</a> &raquo;</li>
       
-    <li>dynamic_rest.conf</li>
+    <li>xtrm_drest.conf</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -128,11 +128,11 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for dynamic_rest.conf</h1><div class="highlight"><pre>
+  <h1>Source code for xtrm_drest.conf</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">django.conf</span> <span class="kn">import</span> <span class="n">settings</span> <span class="k">as</span> <span class="n">django_settings</span>
 <span class="kn">from</span> <span class="nn">django.test.signals</span> <span class="kn">import</span> <span class="n">setting_changed</span>
 
-<span class="n">DYNAMIC_REST</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">xtrm_drest</span> <span class="o">=</span> <span class="p">{</span>
     <span class="c1"># DEBUG: enable/disable internal debugging</span>
     <span class="s1">&#39;DEBUG&#39;</span><span class="p">:</span> <span class="bp">False</span><span class="p">,</span>
 
@@ -177,7 +177,7 @@
 <span class="p">}</span>
 
 
-<div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.conf.Settings">[docs]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
+<div class="viewcode-block" id="Settings"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.conf.Settings">[docs]</a><span class="k">class</span> <span class="nc">Settings</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span></div>
 
     <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">name</span><span class="p">,</span> <span class="n">defaults</span><span class="p">,</span> <span class="n">settings</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">name</span>
@@ -218,7 +218,7 @@
             <span class="bp">self</span><span class="o">.</span><span class="n">_reload</span><span class="p">(</span><span class="n">value</span><span class="p">)</span>
 
 
-<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="s1">&#39;DYNAMIC_REST&#39;</span><span class="p">,</span> <span class="n">DYNAMIC_REST</span><span class="p">,</span> <span class="n">django_settings</span><span class="p">)</span>
+<span class="n">settings</span> <span class="o">=</span> <span class="n">Settings</span><span class="p">(</span><span class="s1">&#39;xtrm_drest&#39;</span><span class="p">,</span> <span class="n">xtrm_drest</span><span class="p">,</span> <span class="n">django_settings</span><span class="p">)</span>
 </pre></div>
 
            </div>

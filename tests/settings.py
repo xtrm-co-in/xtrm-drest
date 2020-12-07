@@ -34,7 +34,7 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sites',
-    'dynamic_rest',
+    'xtrm_drest',
     'tests',
 )
 
@@ -42,26 +42,26 @@ REST_FRAMEWORK = {
     'PAGE_SIZE': 50,
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework.renderers.JSONRenderer',
-        'dynamic_rest.renderers.DynamicBrowsableAPIRenderer'
+        'xtrm_drest.renderers.DynamicBrowsableAPIRenderer'
     )
 }
 
 ROOT_URLCONF = 'tests.urls'
 
 STATICFILES_DIRS = (
-    os.path.abspath(os.path.join(BASE_DIR, '../dynamic_rest/static')),
+    os.path.abspath(os.path.join(BASE_DIR, '../xtrm_drest/static')),
 )
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': os.path.abspath(os.path.join(BASE_DIR,
-                                '../dynamic_rest/templates')),
+                                '../xtrm_drest/templates')),
         'APP_DIRS': True,
     }
 ]
 
-DYNAMIC_REST = {
+xtrm_drest = {
     'ENABLE_LINKS': True,
-    'DEBUG': os.environ.get('DYNAMIC_REST_DEBUG', 'false').lower() == 'true'
+    'DEBUG': os.environ.get('xtrm_drest_DEBUG', 'false').lower() == 'true'
 }

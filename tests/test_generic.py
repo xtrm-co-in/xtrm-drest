@@ -2,8 +2,8 @@ import json
 
 from rest_framework.test import APITestCase
 
-from dynamic_rest.fields import DynamicGenericRelationField
-from dynamic_rest.routers import DynamicRouter
+from xtrm_drest.fields import DynamicGenericRelationField
+from xtrm_drest.routers import DynamicRouter
 from tests.models import User, Zebra
 from tests.serializers import UserSerializer
 from tests.setup import create_fixture

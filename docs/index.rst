@@ -11,7 +11,7 @@ Dynamic REST Documentation
    :caption: Contents
 
    tutorial
-   dynamic_rest
+   xtrm_drest
 
 
 Indices and tables

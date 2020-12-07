@@ -32,13 +32,13 @@ INSTALLED_APPS = (
     'django.contrib.contenttypes',
     'django.contrib.auth',
     'django.contrib.sites',
-    'dynamic_rest',
+    'xtrm_drest',
     'rest_framework',
     'benchmarks',
 )
 
 ROOT_URLCONF = 'benchmarks.urls'
 
-DYNAMIC_REST = {
+xtrm_drest = {
     'ENABLE_LINKS': False
 }

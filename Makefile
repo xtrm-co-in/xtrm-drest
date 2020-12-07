@@ -1,4 +1,4 @@
-APP_NAME := 'dynamic_rest'
+APP_NAME := 'xtrm_drest'
 INSTALL_DIR  ?= ./build
 PORT         ?= 9002
 

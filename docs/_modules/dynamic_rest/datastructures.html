@@ -8,7 +8,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>dynamic_rest.datastructures &mdash; Dynamic REST 1.3.15 documentation</title>
+  <title>xtrm_drest.datastructures &mdash; Dynamic REST 1.3.15 documentation</title>
   
 
   
@@ -83,7 +83,7 @@
                 <p class="caption"><span class="caption-text">Contents</span></p>
 <ul>
 <li class="toctree-l1"><a class="reference internal" href="../../tutorial.html">Dynamic REST Tutorial</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../../dynamic_rest.html">dynamic_rest package</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../xtrm_drest.html">xtrm_drest package</a></li>
 </ul>
 
             
@@ -116,7 +116,7 @@
       
           <li><a href="../index.html">Module code</a> &raquo;</li>
       
-    <li>dynamic_rest.datastructures</li>
+    <li>xtrm_drest.datastructures</li>
       <li class="wy-breadcrumbs-aside">
         
           
@@ -128,15 +128,15 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
             
-  <h1>Source code for dynamic_rest.datastructures</h1><div class="highlight"><pre>
+  <h1>Source code for xtrm_drest.datastructures</h1><div class="highlight"><pre>
 <span></span><span class="sd">&quot;&quot;&quot;This module contains custom data-structures.&quot;&quot;&quot;</span>
 <span class="kn">from</span> <span class="nn">django.utils</span> <span class="kn">import</span> <span class="n">six</span>
 
 
-<div class="viewcode-block" id="TreeMap"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.datastructures.TreeMap">[docs]</a><span class="k">class</span> <span class="nc">TreeMap</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
+<div class="viewcode-block" id="TreeMap"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.datastructures.TreeMap">[docs]</a><span class="k">class</span> <span class="nc">TreeMap</span><span class="p">(</span><span class="nb">dict</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Tree structure implemented with nested dictionaries.&quot;&quot;&quot;</span>
 
-<div class="viewcode-block" id="TreeMap.get_paths"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.datastructures.TreeMap.get_paths">[docs]</a>    <span class="k">def</span> <span class="nf">get_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+<div class="viewcode-block" id="TreeMap.get_paths"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.datastructures.TreeMap.get_paths">[docs]</a>    <span class="k">def</span> <span class="nf">get_paths</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Get all paths from the root to the leaves.</span>
 
 <span class="sd">        For example, given a chain like `{&#39;a&#39;:{&#39;b&#39;:{&#39;c&#39;:None}}}`,</span>
@@ -157,7 +157,7 @@
                 <span class="n">paths</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">key</span><span class="p">])</span>
         <span class="k">return</span> <span class="n">paths</span></div>
 
-<div class="viewcode-block" id="TreeMap.insert"><a class="viewcode-back" href="../../dynamic_rest.html#dynamic_rest.datastructures.TreeMap.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parts</span><span class="p">,</span> <span class="n">leaf_value</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
+<div class="viewcode-block" id="TreeMap.insert"><a class="viewcode-back" href="../../xtrm_drest.html#xtrm_drest.datastructures.TreeMap.insert">[docs]</a>    <span class="k">def</span> <span class="nf">insert</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">parts</span><span class="p">,</span> <span class="n">leaf_value</span><span class="p">,</span> <span class="n">update</span><span class="o">=</span><span class="bp">False</span><span class="p">):</span>
         <span class="sd">&quot;&quot;&quot;Add a list of nodes into the tree.</span>
 
 <span class="sd">        The list will be converted into a TreeMap (chain) and then</span>

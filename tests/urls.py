@@ -1,6 +1,6 @@
 from django.conf.urls import include, url
 
-from dynamic_rest.routers import DynamicRouter
+from xtrm_drest.routers import DynamicRouter
 from tests import viewsets
 
 router = DynamicRouter()

@@ -5,9 +5,9 @@ from collections import OrderedDict
 from django.test import TestCase, override_settings
 from django.utils import six
 
-from dynamic_rest.fields import DynamicRelationField
-from dynamic_rest.processors import register_post_processor
-from dynamic_rest.serializers import DynamicListSerializer, EphemeralObject
+from xtrm_drest.fields import DynamicRelationField
+from xtrm_drest.processors import register_post_processor
+from xtrm_drest.serializers import DynamicListSerializer, EphemeralObject
 from tests.models import User
 from tests.serializers import (
     CatSerializer,
@@ -28,7 +28,7 @@ from tests.setup import create_fixture
 # methods in a more generic way
 
 @override_settings(
-    DYNAMIC_REST={
+    xtrm_drest={
         'ENABLE_LINKS': False
     }
 )
@@ -506,7 +506,7 @@ class TestDynamicSerializer(TestCase):
         self.assertEqual(r1, r2)
         self.assertEqual(r2, r3)
 
-    @patch.dict('dynamic_rest.processors.POST_PROCESSORS', {})
+    @patch.dict('xtrm_drest.processors.POST_PROCESSORS', {})
     def test_post_processors(self):
 
         @register_post_processor
@@ -534,7 +534,7 @@ class TestListSerializer(TestCase):
 
 
 @override_settings(
-    DYNAMIC_REST={
+    xtrm_drest={
         'ENABLE_LINKS': False
     }
 )
@@ -648,7 +648,7 @@ class TestUserLocationSerializer(TestCase):
         self.assertEqual(data['location']['name'], '0')
 
     @override_settings(
-        DYNAMIC_REST={
+        xtrm_drest={
             'DEFER_MANY_RELATIONS': False,
         }
     )
@@ -683,7 +683,7 @@ class TestUserLocationSerializer(TestCase):
         self.assertTrue('groups' in data)
 
     @override_settings(
-        DYNAMIC_REST={
+        xtrm_drest={
             'DEFER_MANY_RELATIONS': True,
         }
     )
@@ -707,7 +707,7 @@ class TestUserLocationSerializer(TestCase):
 
 
 @override_settings(
-    DYNAMIC_REST={
+    xtrm_drest={
         'ENABLE_SERIALIZER_CACHE': True
     }
 )
