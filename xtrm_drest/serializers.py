@@ -707,8 +707,9 @@ class WithDynamicSerializerMixin(
             id_field = self.fields[id_attr]
             id_value = id_field.get_value(data)
             value[id_attr] = id_value
-
-        return value
+        #This statement is being commented as validation for nested object didn't work if returned value
+        # return value
+        return data
 
     def save(self, *args, **kwargs):
         """Serializer save that address prefetch issues."""

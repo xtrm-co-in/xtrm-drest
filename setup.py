@@ -5,7 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setuptools.setup(
     name="xtrm-drest", # Replace with your own username
-    version="0.0.5",
+    version="0.0.7",
     author="Extreme Solutions",
     author_email="ketan@extremesolutions.in",
     description="Dynamic REST with DRF Writable Nested package for CRUD",
